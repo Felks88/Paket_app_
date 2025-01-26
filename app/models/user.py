@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 from app.backend.db import Base
-from sqlalchemy import Integer, String, Column, ForeignKey
+from sqlalchemy import Integer, String, Column
 from sqlalchemy.orm import relationship
 
 router = APIRouter(prefix="/user", tags=["user"])
@@ -8,6 +8,7 @@ router = APIRouter(prefix="/user", tags=["user"])
 
 class User(Base):
     __tablename__ = "users"
+    __table_args__ = {'extend_existing': True}
     id = Column(Integer, primary_key=True, index=True)
     username = Column(String)
     firstname = Column(String)

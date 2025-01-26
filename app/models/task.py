@@ -1,4 +1,5 @@
 from app.backend.db import Base
+from app.models.user import User
 from fastapi import APIRouter
 from sqlalchemy.orm import relationship
 from sqlalchemy import Integer, String, Column, Boolean, ForeignKey
@@ -8,6 +9,7 @@ router = APIRouter(prefix="/task", tags=["task"])
 
 class Task(Base):
     __tablename__ = "tasks"
+    __table_args__ = {'extend_existing': True}
     id = Column(Integer, primary_key=True, index=True)
     title = Column(String)
     content = Column(String)
